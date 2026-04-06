@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -41,7 +42,16 @@ export default async function DashboardPage() {
       </div>
 
       <div className="bg-white rounded-xl border shadow-sm p-6">
-        <h2 className="text-lg font-semibold mb-2">Your Embed Snippet</h2>
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-lg font-semibold">Your Embed Snippet</h2>
+          <Link
+            href={`/test?widgetId=${widgetId}`}
+            target="_blank"
+            className="inline-flex items-center gap-2 bg-indigo-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+          >
+            <span>💬</span> Test Widget
+          </Link>
+        </div>
         <p className="text-gray-500 text-sm mb-4">
           Add this code to your website, just before the closing <code>&lt;/body&gt;</code> tag.
         </p>
